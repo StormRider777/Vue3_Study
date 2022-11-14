@@ -71,6 +71,7 @@ module.exports = defineConfig({
 
 ```
 - 2.Django 的views代码:
+
 ```python
 
 from django.shortcuts import render,HttpResponse
@@ -127,6 +128,7 @@ def postdata(request):
 
 
 ```
+
 - 3.vue 代码:
 ```vue
 
