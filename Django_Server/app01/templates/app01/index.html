@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django_Server</title>
+</head>
+<body>
+    <div style="margin: 30px auto;width: 100%;text-align: center;line-height: 40px">
+        <img src="{% static 'app01/VDlogo.jpg' %}" alt=""
+             style="margin: 20px auto;width: 100px;height: 100px;
+                    box-shadow: 0px 0px 2px 2px linen;
+                    border-radius:30px">
+        <h3 style="color:red">Django Is Servering...</h3>
+        <hr>
+        <ul style="list-style-type: none;padding: 5px;margin: 10px auto;width:300px">
+            <li><a href="javascript:void(0)" onclick="getdata()">测试 Get 获取数据</a></li>
+            <li><a href="javascript:void(0)" onclick="submitdata()">测试 Post 发送数据</a></li>
+        </ul>
+        <div id="resdata" style="margin: 10px auto;background: lightgray;border-radius: 5px;max-width: 700px">
+
+        </div>
+
+    </div>
+    <style>
+        li{
+            height: 40px;
+            width: 300px;
+        }
+
+        a{
+            display: block;
+            color: black;
+            width: 300px;
+            text-decoration: none;
+        }
+        a:visited{
+            color:black;
+        }
+        li:hover,a:hover{
+            color:yellow;
+            background: darkblue;
+        }
+
+    </style>
+    <script>
+        let token=''
+        var el=document.getElementById('resdata')
+
+        function get_token() {
+            request=new XMLHttpRequest()
+            request.open('GET',"{% url 'app01:gettoken' %}",false)
+            request.send()
+            token=request.responseText
+
+            //console.log(request.status,request.readyState)
+            /*
+            setTimeout(()=>{
+                token=request.responseText
+                console.log(token)
+            },1000)*/
+        }
+
+        function submitdata() {
+
+            try {
+                get_token()
+
+                formdata=new FormData()
+                formdata.append('id',Math.ceil(Math.random()*1000))
+                formdata.append('name','测试数据')
+                formdata.append('salary',Math.ceil(Math.random()*100000))
+                //formdata.append('csrfmiddlewaretoken',token)
+
+                request = new XMLHttpRequest();
+
+                request.open("POST", "{% url 'app01:postdata' %}",false)
+                request.setRequestHeader("X-CSRFToken",token)
+                request.onreadystatechange =function r(){
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+
+                            res=request.responseText
+                            el.innerHTML="<h3 style='color:green;'>POST数据成功!</h3><hr> "+JSON.stringify(JSON.parse(res))
+
+                        } else if (!isValid(this.response) && this.status == 0) {
+                            el.innerHTML="<h3 style='color:red;'>POST连接失败!</h3> "
+                        }
+                    }else{
+                        console.log('请等待,POST正在马不停蹄发送中.....')
+                    }
+                };
+                //request.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+                request.send(formdata)
+            }catch(e){
+                el.innerHTML="<h3 style='color:red;'>POST连接失败!</h3> "
+                request=null
+            }
+
+            /*
+            timer=setTimeout(()=>{
+                res=request.responseText
+                console.log(JSON.parse(res))
+                //clearTimeout(timer)
+            },1000)
+            */
+        }
+
+        function getdata(){
+            kw=Math.ceil(Math.random()*15).toString().padStart(3,'0')
+            xhr=new XMLHttpRequest()
+            xhr.open('GET',`{% url 'app01:getdata' %}?id=${kw}`,false)
+            xhr.send()
+
+            el.innerHTML="<h3 style='color:red;'>GET 获取数据!</h3><hr> "+JSON.stringify(JSON.parse(xhr.responseText))
+        }
+    </script>
+</body>
+</html>

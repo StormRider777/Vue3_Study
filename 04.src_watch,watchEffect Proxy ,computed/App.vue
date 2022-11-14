@@ -1,6 +1,5 @@
 <template>
     <img alt="Vue logo" src="./assets/logo.png" style="width:60px;height: 60px">
-    <hr>
     <MyPage></MyPage>
 </template>
 
