@@ -43,7 +43,7 @@
 - 如果在 pycharm 中书写Django模板代码没有自动提示,pycharm settings languages & frameworks django 项
 - 设置 enagble django support ,django项目的目录.以及settings位置,以及 manage.py
 
-# Django--Vue 通信 
+# Django--Vue 数据交换 传输 采用 XMLHttpReauest 挺方便,也能解决跨域问题
 - 1.如果 vue 前端,与Django提供的后端服务不是同域,则需要在 vue.config.js设置
 ```Vue  vue.config.js
 module.exports = defineConfig({
@@ -196,6 +196,8 @@ def postdata(request):
 
 ```
 - 5.GetDatas.js GET请求 和POST请求的js 
+-- 跨域解决办法,1.请后台处理,2.给token,
+
 ```javascript
 export default {
     gettoken() {
@@ -218,8 +220,8 @@ export default {
         fd.append('name','Vue测试POST数据')
         fd.append('salary',Math.ceil(Math.random()*100000))
         let xhr=new XMLHttpRequest()
-        xhr.open('POST','/django/postdata/',false)
-        xhr.setRequestHeader('X-CSRFToken',this.gettoken())
+        xhr.open('POST','/django/postdata/',false)   # false 同步,默认true 异步
+        xhr.setRequestHeader('X-CSRFToken',this.gettoken()) !!设置header 的X-CSRFToken 很重要,Django middleware.csrf 跨域验证用到的字段 
         xhr.send(fd)
         return JSON.parse(xhr.responseText)
     }

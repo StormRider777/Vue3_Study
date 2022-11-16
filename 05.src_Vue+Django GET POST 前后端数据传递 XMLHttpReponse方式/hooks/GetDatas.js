@@ -8,7 +8,8 @@ export default {
     getdata() {
         let xhr=new XMLHttpRequest()
         let mid=Math.ceil(Math.random()*15).toString().padStart(3,'0')
-        xhr.open('GET',`/django/getdata/?id=${mid}`,false)
+        xhr.open('GET',`/django/getdata/?id=${mid}`,true)
+
         xhr.send()
         return JSON.parse(xhr.responseText)
     },
