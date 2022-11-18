@@ -4,7 +4,14 @@
 </template>
 
 <script>
+import MyPage from "./components/MyPage"
 
+export default {
+    name: 'App',
+    components: {
+     MyPage
+    },
+}
 </script>
 
 <style>
