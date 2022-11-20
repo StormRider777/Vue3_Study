@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes">
+    <title>Title</title>
+</head>
+<body>
+    <div style="height: 50px;line-height: 50px">
+        <div style="float: left;font-size: 35px;color:red;margin-left: 20px">
+            注册用户
+        </div>
+        <div style="width: 100px;float: right">
+            <a href="/" style="display: block;font-size: 10px;text-decoration: none;">主页</a>
+        </div>
+    </div>
+<hr>
+<form action="{% url  'app01:reguser' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div style="width: 400px;height:500px;margin: 25px auto;border: 1px solid gray;border-radius: 5px;
+                display:grid;justify-content:space-around;padding-top: 10px;padding-bottom:10px ">
+        {{ form }}
+        <input type="submit" value="提交数据">
+    </div>
+
+</form>
+</body>
+</html>

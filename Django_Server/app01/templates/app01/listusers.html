@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes">
+    <title>Title</title>
+</head>
+<body>
+    <div style="height: 50px;line-height: 50px">
+        <div style="float: left;font-size: 35px;color:darkblue;margin-left: 20px">
+            用户列表
+        </div>
+        <div style="width: 100px;float: right">
+            <a href="/" style="display: block;font-size: 10px;text-decoration: none;">主页</a>
+        </div>
+    </div>
+<hr>
+<div style="margin:25px auto;width:700px;height: 500px;border: 1px solid gray;border-radius: 5px;overflow: auto">
+    <table style="margin:10px auto;width: 99%;border-color: green;border-collapse: collapse"
+           cellpadding="0" border="1px" cellspacing="0">
+        <thead>
+            <tr style="background: gainsboro"><th>创建时间</th><th>用户名</th><th>手机号</th><th>头像</th></tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td width="180px">{{ user.createtime|date:'Y-m-d H:i:s' }}</td>
+                    <td>{{ user.name }}</td><td>{{ user.tele }}</td>
+                    <td style="width: 60px">
+                        <div  style="margin:2px auto;width: 60px;display:flex;justify-content:center;border-radius: 20px;overflow: hidden">
+                            <img src="{{ MEDIA_URL}}{{ user.photo }}" alt=""
+                                 style="border:1px solid grey;height: 50px;width: 50px;object-fit: cover;border-radius: 25px">
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+<style>
+    thead > tr{
+        height: 35px;
+    }
+    tbody > tr{
+        height: 50px;
+    }
+    tbody > tr:hover{
+        background: skyblue;
+    }
+    tbody>tr>td{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+</body>
+</html>

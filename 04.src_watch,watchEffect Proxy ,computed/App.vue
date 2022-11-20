@@ -1,11 +1,17 @@
 <template>
     <img alt="Vue logo" src="./assets/logo.png" style="width:60px;height: 60px">
-    <hr>
     <MyPage></MyPage>
 </template>
 
 <script>
+import MyPage from "./components/MyPage"
 
+export default {
+    name: 'App',
+    components: {
+     MyPage
+    },
+}
 </script>
 
 <style>

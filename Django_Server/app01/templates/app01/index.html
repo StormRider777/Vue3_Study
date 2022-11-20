@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django_Server</title>
+</head>
+<body>
+    <div style="margin: 10px auto;width: 100%;text-align: center;line-height: 40px">
+        <img src="{% static 'app01/VDlogo.jpg' %}" alt=""
+             style="margin: 10px auto;width: 50px;height: 50px;
+                    box-shadow: 0px 0px 2px 2px linen;
+                    border-radius:30px">
+        <h3 style="color:red">Django Is Servering...</h3>
+        <hr>
+        <div style="margin: 10px auto;width: 300px">
+            <a href="{% url 'app01:reguser' %}" style="margin:10px auto;display: block;text-decoration: none;margin-left:15px ">注册用户</a>
+            <a href="{% url 'app01:listuser' %}" style="margin:10px auto;display: block;text-decoration: none;margin-left:15px">显示注册用户列表</a>
+        </div>
+
+        <div  style="width: 500px;margin: 10px auto;text-align: left">
+            <span style="height: 40px;width: 400px;margin-left: 15px">
+                <input id='msgtxt' type="text" placeholder="请输入..." style="width: 300px;height: 30px">
+                <button style="height: 38px;width: 100px" onclick="Wssendmsg()">发送</button>
+                <button style="height: 38px;width: 100px" onclick="closeWs()">断开连接</button>
+            </span>
+            <div id="wsdiv"
+                 style="margin-top:10px;border-radius:5px;padding-top: 5px;padding-bottom: 5px;
+                 background:whitesmoke;width: 100%;border: 1px solid grey;
+                 height: 200px;overflow:auto;display:flex;flex-direction:column">
+
+            </div>
+        </div>
+        <script>
+            let Socket=new WebSocket('ws://127.0.0.1/wsmsg/?id=9999999&name="张国"')
+            // 回调函数,自动接受 服务端传来的消息.
+            Socket.onmessage=function (event){  // 监视ws的消息变化
+                let el=document.createElement('div')
+                el.style.background='rgb(20,210,20)'
+                el.style.marginTop='5px'
+                el.style.marginLeft='10px'
+                el.style.marginBottom='5px'
+                el.style.borderRadius='5px'
+                el.style.fontSize='15px'
+                el.style.lineHeight='30px'
+                el.style.color='rgb(5,5,10)'
+                el.style.paddingLeft='5px'
+
+                el.style.width='60%'
+                // console.log('====',event.data)
+                el.innerHTML=event.data
+
+                p=document.getElementById('wsdiv')
+                p.appendChild(el)
+                p.scrollTop=p.scrollHeight
+
+            }
+            Socket.onopen=function (enent){  //
+                // 创建连接完成 自动触发
+                //console.log('connected!')
+            }
+            Socket.onclose=function (event){
+                //服务端主动断开连接,触发此函数
+            }
+            Socket.onerror=function (event) {
+                console.log(event)
+                alert('websocket 发生了错误!')
+            }
+
+            function Wssendmsg(){
+                let msg=document.getElementById('msgtxt').value
+                Socket.send(msg)
+            }
+            function closeWs() {
+                Socket.send('[前端主动关闭连接!]')  //异步,虽然已发送到后端,,但不等当前接受,就关闭了接收,其他前端能接受到此信息
+                Socket.close()
+            }
+
+        </script>
+
+
+        <ul style="list-style-type: none;padding: 5px;margin: 10px auto;width:300px">
+            <li><a href="javascript:void(0)" onclick="getdata()">测试 Get 获取数据</a></li>
+            <li><a href="javascript:void(0)" onclick="submitdata()">测试 Post 发送数据</a></li>
+        </ul>
+        <div id="resdata" style="margin: 10px auto;background: lightgray;border-radius: 5px;max-width: 700px">
+
+        </div>
+
+    </div>
+    <style>
+        li{
+            height: 40px;
+            width: 300px;
+        }
+
+        a{
+            display: block;
+            color: black;
+            width: 300px;
+            text-decoration: none;
+        }
+        a:visited{
+            color:black;
+        }
+        li:hover,a:hover{
+            color:yellow;
+            background: darkblue;
+        }
+
+    </style>
+    <script>
+        let token=''
+        var el=document.getElementById('resdata')
+
+        function get_token() {
+            request=new XMLHttpRequest()
+            request.open('GET',"{% url 'app01:gettoken' %}",false)
+            request.send()
+            token=request.responseText
+
+            //console.log(request.status,request.readyState)
+            /*
+            setTimeout(()=>{
+                token=request.responseText
+                console.log(token)
+            },1000)*/
+        }
+
+        function submitdata() {
+
+            try {
+                get_token()
+
+                formdata=new FormData()
+                formdata.append('id',Math.ceil(Math.random()*1000))
+                formdata.append('name','测试数据')
+                formdata.append('salary',Math.ceil(Math.random()*100000))
+                //formdata.append('csrfmiddlewaretoken',token)
+
+                request = new XMLHttpRequest();
+
+                request.open("POST", "{% url 'app01:postdata' %}",false)
+                request.setRequestHeader("X-CSRFToken",token)
+                request.onreadystatechange =function r(){
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+
+                            res=request.responseText
+                            el.innerHTML="<h3 style='color:green;'>POST数据成功!</h3><hr> "+JSON.stringify(JSON.parse(res))
+
+                        } else if (!isValid(this.response) && this.status == 0) {
+                            el.innerHTML="<h3 style='color:red;'>POST连接失败!</h3> "
+                        }
+                    }else{
+                        console.log('请等待,POST正在马不停蹄发送中.....')
+                    }
+                };
+                //request.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+                request.send(formdata)
+            }catch(e){
+                el.innerHTML="<h3 style='color:red;'>POST连接失败!</h3> "
+                request=null
+            }
+
+            /*
+            timer=setTimeout(()=>{
+                res=request.responseText
+                console.log(JSON.parse(res))
+                //clearTimeout(timer)
+            },1000)
+            */
+        }
+
+        function getdata(){
+            kw=Math.ceil(Math.random()*15).toString().padStart(3,'0')
+            xhr=new XMLHttpRequest()
+            xhr.open('GET',`{% url 'app01:getdata' %}?id=${kw}`,false)
+            xhr.send()
+
+            el.innerHTML="<h3 style='color:red;'>GET 获取数据!</h3><hr> "+JSON.stringify(JSON.parse(xhr.responseText))
+        }
+    </script>
+</body>
+</html>
