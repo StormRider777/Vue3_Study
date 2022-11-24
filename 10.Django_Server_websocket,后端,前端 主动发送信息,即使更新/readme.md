@@ -45,7 +45,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Django_Server.settings')
 # application = get_asgi_application()
 application=ProtocolTypeRouter({
     'http':get_asgi_application(), #django 自动寻找 :url --views
-    'websocket':URLRouter(routing.websocket_urlpatterns) # routing--consumers
+    'websocket':URLRouter(routing.websocket_urlpatterns) router
 })
 
 
