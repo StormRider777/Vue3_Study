@@ -1,17 +1,11 @@
 import {createStore} from 'vuex'
+import config from '../store/config'
+import Menus from "../store/menus"
 export default createStore({
-    state:{
-        path:''
-    },
-    getters:{
-
-    },
-    mutations:{
-        curpath(state,param){
-            state.path=param
-        }
-    },
-    actions:{
-
-    }
+    state:{},
+    getters:{},
+    actions:{},
+    mutations:{},
+    modules:{config,Menus}
 })
+

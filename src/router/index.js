@@ -1,31 +1,22 @@
-import {createRouter,createWebHashHistory,createWebHistory} from "vue-router"
-import Login from "../view/login/Login"
-import Home from "../view/ywgl/Home"
-import About from "../view/ywgl/About"
-import Register from "../view/login/register"
+import {createRouter,createWebHistory} from 'vue-router'
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css' // Progress 进度条样式
 
-export default createRouter({
+import Login from "../view/Login"
+import Home from "../view/Home"
+import Error from "../view/Error"
+
+const router=createRouter({
     history:createWebHistory(),
     routes:[
         {
-          path:'/',
-          name:'firstpage',
-          component:()=>import("../view/login/FirstPage.vue")
+            path:'/',
+            redirect:'/login'
         },
         {
-            path:"/login/",
+            path:'/login/',
             name:'login',
             component:Login
-        },
-        {
-            path:"/about/",
-            name:'about',
-            component:About
-        },
-        {
-            path:'/reg/',
-            name:'reg',
-            component:Register
         },
         {
             path:'/home/',
@@ -33,56 +24,42 @@ export default createRouter({
             component:Home,
             children:[
                 {
-                    path:'ywsr',
-                    name:'ywsr',
-                    component:()=>import('../view/ywgl/childrens/YwSr.vue'),
-                    meta:{
-                        title:'业务输入',
-                        mymeta:'asdfasfasf'
-                    }
+                    path:'',
+                    component:()=>import("../component/HomeMain.vue")
                 },
                 {
-                    path:'ywxg',
-                    name:'ywxg',
-                    component:()=>import('../view/ywgl/childrens/YwXg.vue'),
-                    meta:{
-                        title:'业务修改'
-                    }
+                    path:'error',
+                    component:Error
                 },
                 {
-                    path:'ywsh',
-                    name:'ywsh',
-                    component:()=>import('../view/ywgl/childrens/YwSh.vue'),
-                    meta:{
-                        title:'业务审核'
-                    }
+                    path:'my/changpwd',
+                    component:()=>import("../view/My/ChangPwd.vue"),
                 },
                 {
-                    path:'ywcx',
-                    name:'ywcx',
-                    component:()=>import('../view/ywgl/childrens/YwCx.vue'),
-                    meta:{
-                        title:'业务查询'
-                    },
-                    children: [
-                        {
-                            path:'ywcxres1',
-                            name:'ywcxres1',
-                            component:()=>import("../view/ywgl/childrens/YwCxRes")
-                        }
-                    ]
+                    path:'my/info',
+                    component:()=>import("../view/My/Info.vue"),
                 },
                 {
-                    path:'register',
-                    name:'register',
-                    component:Register
-                },
-                {
-                    path:'ywcxres2',
-                    name:'ywcxres2',
-                    component:()=>import("../view/ywgl/childrens/YwCxRes")
+                    path:'my/editinfo',
+                    component:()=>import("../view/My/EditInfo.vue"),
                 }
             ]
+        },
+        {
+            path:'/error/',
+            component:Error
         }
     ]
 })
+
+router.beforeEach((to,from,next)=>{
+    Nprogress.start()
+    //console.log("from:",from ,"to:",to)
+
+    next()
+})
+router.afterEach((to,from)=>{
+    Nprogress.done()
+})
+
+export default router

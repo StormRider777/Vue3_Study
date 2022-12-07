@@ -53,11 +53,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app01.MyWare.MyWare',
 ]
+
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ROOT_URLCONF = 'Django_Server.urls'
 
@@ -133,7 +136,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'app01','media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-APPEND_SLASH=False  # 设置 路径是否自动 添加 /
+APPEND_SLASH=True  # 设置 路径是否自动 添加 /
 
 ASGI_APPLICATION='Django_Server.asgi.application'  #django 启动默认WSGI
 #ASGI_APPLICATION = "chatroom.asgi.application"
