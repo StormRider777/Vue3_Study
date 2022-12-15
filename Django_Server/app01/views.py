@@ -7,6 +7,7 @@ from . import models
 from django.db.models import Q,F
 # Create your views here.
 def index(request):
+    request.session['name']='Jack'
     return render(request,'app01/index.html')
 
 def gettoken(request):

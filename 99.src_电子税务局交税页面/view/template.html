@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<!-- saved from url=(0196)https://etax.shandong.chinatax.gov.cn/sbzx-cjpt-web/biz/skjn/qjsk/form/qjsk.html -->
+<!DOCTYPE html PUBLIC "" "">
+<HTML lang="en">
+<HEAD>
+    <META content="IE=11.0000"
+          http-equiv="X-UA-Compatible">
+
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <META http-equiv="X-UA-Compatible" content="IE=8; IE=EDGE">
+    <TITLE>税费缴纳</TITLE>
+    <LINK href="税费缴纳_files/comon0.css" rel="stylesheet" type="text/css">
+    <LINK
+            href="税费缴纳_files/common.css" rel="stylesheet">
+    <LINK href="税费缴纳_files/layui.css"
+          rel="stylesheet" type="text/css">
+    <LINK href="税费缴纳_files/iconfont.css" rel="stylesheet"
+          type="text/css">
+    <LINK href="税费缴纳_files/qjsk.css" rel="stylesheet">
+    <SCRIPT src="税费缴纳_files/jquery.min.js" type="text/javascript" langua=""></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/js.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/jquery.reveal.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/layui.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/qrcode.min.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/comFaction.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/verifiFaction.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/qjsk.js" type="text/javascript"></SCRIPT>
+
+    <SCRIPT src="税费缴纳_files/overrideFaction.js" type="text/javascript"></SCRIPT>
+
+    <META name="GENERATOR" content="MSHTML 11.00.9600.20139">
+</HEAD>
+<BODY class="padd01">
+<TABLE width="100%" class="top_title" id="qjskTitle" style="margin-bottom: 20px;"
+       border="0" cellspacing="0" cellpadding="0">
+    <TBODY>
+    <TR>
+        <TD width="46"><IMG src="税费缴纳_files/left_sbjs_qjsk.png"></TD>
+        <TD>
+            <DIV class="big_title">税费缴纳</DIV>
+        </TD>
+    </TR>
+    </TBODY>
+</TABLE><!-- 扣款不明信息提示 -->
+<DIV class="tax-notice marginB16" id="information"></DIV>
+<DIV class="searchbox" id="zrrSwjgSearch" style="display: none;">
+    <DIV class="layui-form">
+        <DIV class="layui-form-item" style="margin-bottom: 8px;">
+            <DIV class="layui-inline marginB12"><LABEL class="layui-form-label label-left"
+                                                       style="width: 80px;">税务机关:</LABEL>
+                <DIV class="layui-input-inline"><SELECT name="zrrSwjgSelect"
+                                                        id="zrrSwjgSelect">
+                    <OPTION value="" selected=""></OPTION>
+                </SELECT>
+                </DIV>
+                <BUTTON class="layui-btn" onclick="zrrQueryBtn()">查询</BUTTON>
+            </DIV>
+        </DIV>
+    </DIV>
+</DIV>
+<DIV class="user_box01 layui-form">
+    <DIV class="searchbox">
+        <DIV style="-ms-overflow-x: scroll;">
+            <TABLE width="100%" class="layui-table" id="qsxxGrid" border="0" cellspacing="0"
+                   cellpadding="0">
+                <TBODY>
+                <TR>
+                    <TH width="25"><INPUT id="checkAll" onclick="checkAll();" type="checkbox"
+                                          checked="checked" lay-skin="primary" lay-filter="checkAll"></TH>
+                    <TH width="30" height="177">序号</TH>
+                    <TH>应征凭证序号</TH>
+                    <TH>税（费）种</TH>
+                    <TH>税（品）目</TH>
+                    <TH>税款所属起</TH>
+                    <TH>税款所属止</TH>
+                    <TH>缴款期限</TH>
+                    <TH>应补退税额</TH>
+                    <TH>实缴金额</TH>
+                    <TH>滞纳金</TH>
+                    <TH>是否逾期</TH>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </DIV>
+    </DIV>
+</DIV><!-- 存放分页的容器 -->
+<DIV id="layuiPage"></DIV>
+<DIV id="swjgTip"></DIV><!-- 缴款金额合计 -->
+<DIV class="footText01 layui-form"
+     style="background-color: rgb(249, 249, 249);"><SPAN class="znj-span"><INPUT
+        title="是否一并缴纳滞纳金" id="znjtsjscs" type="checkbox" checked="" lay-skin="primary"
+        lay-filter="checkZnj">		 </SPAN> 共选择<SPAN
+        id="qsxxTotalCnt">0</SPAN>条待清缴记录。实缴金额<SPAN id="hjBcjnse" style="color: rgb(0, 118, 201);">0.00</SPAN>
+    元，滞纳金 <SPAN id="hjZnj" style="color: rgb(0, 118, 201);">0.00</SPAN>元， 合计<SPAN
+            id="hjAll"
+            style="color: rgb(255, 0, 0); font-size: 28px; font-weight: bold;">0.00</SPAN>元。
+</DIV><!-- 缴款方式 -->
+<DIV id="jkfsDiv"></DIV>
+<DIV class="page01" style="clear: both; margin-top: 10px;"><A class="layui-btn layui-btn-lg layui-btn-normal"
+                                                              id="a_main_ljjk" style="padding: 0px 25px; height: 44px; line-height: 44px; font-size: 16px;"
+                                                              onclick="ljjk();"
+                                                              href="https://etax.shandong.chinatax.gov.cn/sbzx-cjpt-web/biz/skjn/qjsk/form/qjsk.html?ywzt=Y&amp;gdslxDm=1&amp;channelId=C03&amp;tmp_code=F1EE157A57254B4782027B01DB3CF6D5&amp;userJylsh=8A27F41EB73D467A98C139143C152EB4#none"
+                                                              type="button">立即缴款</A> &nbsp;&nbsp;&nbsp;&nbsp; <A class="layui-btn layui-btn-lg layui-btn-warm"
+                                                                                                                 id="jskk" style="padding: 0px 25px; height: 44px; line-height: 44px; font-size: 16px;"
+                                                                                                                 onclick="unLockYl();"
+                                                                                                                 href="https://etax.shandong.chinatax.gov.cn/sbzx-cjpt-web/biz/skjn/qjsk/form/qjsk.html?ywzt=Y&amp;gdslxDm=1&amp;channelId=C03&amp;tmp_code=F1EE157A57254B4782027B01DB3CF6D5&amp;userJylsh=8A27F41EB73D467A98C139143C152EB4#none"
+                                                                                                                 type="button">未缴款凭证作废(解锁)</A> <A class="btn btn01" id="a_click_jk"
+                                                                                                                                                  style="display: none;"
+                                                                                                                                                  href="https://etax.shandong.chinatax.gov.cn/sbzx-cjpt-web/biz/skjn/qjsk/form/qjsk.html?ywzt=Y&amp;gdslxDm=1&amp;channelId=C03&amp;tmp_code=F1EE157A57254B4782027B01DB3CF6D5&amp;userJylsh=8A27F41EB73D467A98C139143C152EB4#none"
+                                                                                                                                                  type="button" data-animation="fade"
+                                                                                                                                                  data-reveal-id="pay_moda">隐藏层</A></DIV>
+<DIV class="div_message_show" id="div_message" style="padding: 20px 0px 0px; color: rgb(153, 153, 153); letter-spacing: 1px; font-size: 12px; margin-right: 30px;">
+    <DIV class="tax-text-primary">
+        <H5>温馨提示</H5>
+        <UL class="text-center">
+            <DIV id="div_context"
+                 style="line-height: 20px; font-size: 12px;"></DIV>
+        </UL>
+    </DIV>
+</DIV>
+<DIV id="div_unlockxx" style="display: none;">
+    <TABLE width="100%" class="top_title" border="0" cellspacing="0"
+           cellpadding="0"></TABLE>
+    <DIV class="user_box01" style="-ms-overflow-x: auto;">
+        <DIV class="searchbox">
+            <DIV class="searchTable">
+                <TABLE width="100%" id="unlockxxGrid" border="0" cellspacing="0"
+                       cellpadding="0">
+                    <TBODY>
+                    <TR>
+                        <TH>税款缴纳方式</TH>
+                        <TH>电子税票号码</TH>
+                        <TH>扣款返回码</TH>
+                        <TH>扣款返回信息</TH>
+                    </TR>
+                    </TBODY>
+                </TABLE>
+            </DIV>
+        </DIV>
+    </DIV>
+</DIV>
+<DIV class="reveal-modal" id="pay_moda" style="top: 200px; width: 900px;">
+    <DIV class="tc_tit" id="jkfsMcdiv" style="border: 1px solid rgb(221, 221, 221); border-image: none; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">三方协议或银联缴款</DIV>
+    <A
+            class="close_btn close-reveal-modal" id="a_pay_Moda_colse" style="color: rgb(51, 51, 51);"
+            href="https://etax.shandong.chinatax.gov.cn/sbzx-cjpt-web/biz/skjn/qjsk/form/qjsk.html?ywzt=Y&amp;gdslxDm=1&amp;channelId=C03&amp;tmp_code=F1EE157A57254B4782027B01DB3CF6D5&amp;userJylsh=8A27F41EB73D467A98C139143C152EB4#none">×</A>
+
+    <DIV class="user_box01 layui-form" id="pay_div" style="-ms-overflow-y: auto;">
+        <DIV class="searchbox tc_nav" style="height: 200px;">
+            <TABLE width="100%" style="margin-bottom: 20px;" border="0" cellspacing="0"
+                   cellpadding="0">
+                <TBODY>
+                <TR>
+                    <TD id="qjxx_div_td1" style="width: 100%; padding-right: 20px; vertical-align: top;"></TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+            <TABLE width="100%" style="margin-bottom: 20px;" border="0" cellspacing="0"
+                   cellpadding="0">
+                <TBODY>
+                <TR>
+                    <TD id="pay_div_td1" style="width: 100%; padding-right: 20px; vertical-align: top;">
+                        <DIV class="searchTable">
+                            <P style="white-space: normal; -ms-word-break: break-all;"
+                               name="tips"></P>
+                            <TABLE width="100%" class="table-radio-center" id="pay_way_gs_grid"
+                                   border="0" cellspacing="0" cellpadding="0"></TABLE>
+                            <TABLE width="100%" class="table-radio-center" id="pay_result_gs_grid"
+                                   border="0" cellspacing="0"
+                                   cellpadding="0"></TABLE>
+                        </DIV>
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </DIV>
+    </DIV>
+    <DIV class="footBtn01" id="model_btn"><A class="foot-btm" id="a_way_gs_sfxy"
+                                             style="display: none; cursor: pointer;" onclick="sfxyKk()"
+                                             type="button">三方协议扣款</A> <A class="foot-btm" id="a_way_gs_yljk" style="display: none; cursor: pointer;"
+                                                                         onclick="yljkpz('yljk')" type="button">银联缴款</A> <A class="foot-btm" id="yhdjkpzdy"
+                                                                                                                            style="display: none; cursor: pointer;" onclick="yhdjkpzdyClick()"
+                                                                                                                            href="https://etax.shandong.chinatax.gov.cn/sbzx-cjpt-web/biz/skjn/qjsk/form/qjsk.html?ywzt=Y&amp;gdslxDm=1&amp;channelId=C03&amp;tmp_code=F1EE157A57254B4782027B01DB3CF6D5&amp;userJylsh=8A27F41EB73D467A98C139143C152EB4#none"
+                                                                                                                            type="button">银行端缴款凭证打印</A></DIV>
+</DIV>
+<DIV id="printDiv" style="display: none;"><!--startprint-->
+    <DIV id="recieptDiv"
+         style="margin: 0px auto; width: 1000px; display: block;"></DIV><!--endprint-->
+    <P id="err_tips_p" style="clolr: red;"></P></DIV>
+<DIV align="center" id="payByewm" style="display: none;">
+    <DIV id="qrcode_payByewm"></DIV>
+</DIV>
+<DIV id="lockOpen" style="display: none;"></DIV><!-- 银联开票锁定的信息 -->
+<DIV class="win-center" id="ylUnlock" style="display: none;">
+    <DIV class="user_box01" style="-ms-overflow-x: auto;">
+        <DIV class="searchbox">
+            <DIV class="searchTable">
+                <TABLE width="100%" id="lockTab" border="0" cellspacing="0" cellpadding="0">
+                    <TBODY>
+                    <TR>
+                        <TH width="30"><INPUT name="checkLockYlAll" onclick="checkLockYlAll(this)"
+                                              type="checkbox" checked=""></TH>
+                        <TH width="30">序号</TH>
+                        <TH>税款缴纳方式</TH>
+                        <TH>电子税票号</TH>
+                        <TH>扣缴日期</TH>
+                        <TH>实缴金额</TH>
+                    </TR>
+                    </TBODY>
+                </TABLE>
+            </DIV>
+        </DIV>
+    </DIV>
+    <DIV style="padding: 10px 0px; text-align: center;">
+        <BUTTON class="layui-btn layui-btn-disabled"
+                id="ljjs" style="pointer-events: none;" onclick="ljjs()">立即解锁
+        </BUTTON>
+    </DIV>
+    <DIV style="color: rgb(153, 153, 153); font-size: 12px;">
+        <DIV style="line-height: 20px; font-size: 12px;"><SPAN style="color: rgb(255, 142, 2); font-size: 14px;">注意：</SPAN>
+            <SPAN>					点击【立即解锁】按钮，将作废（解锁）您当前勾选的未缴款凭证，被作废缴款凭证的税款将重新转为未清缴状态，
+					您可以重新选择三方协议缴款或者其他缴款方式进行缴款。				 </SPAN></DIV>
+    </DIV>
+</DIV><!-- 银联解锁的结果 -->
+
+<DIV class="win-center" id="unLockRtn" style="display: none;">
+    <DIV class="user_box01" style="-ms-overflow-x: auto;">
+        <DIV class="searchbox">
+            <DIV class="searchTable">
+                <TABLE width="100%" id="unLockTab" border="0" cellspacing="0" cellpadding="0">
+                    <TBODY>
+                    <TR>
+                        <TH width="30">序号</TH>
+                        <TH>电子税票号</TH>
+                        <TH>扣款返回码</TH>
+                        <TH>扣款信息</TH>
+                    </TR>
+                    </TBODY>
+                </TABLE>
+            </DIV>
+        </DIV>
+    </DIV>
+</DIV><!-- 提前缴款理由 -->
+<DIV class="item-div" id="hjlyDivId" style="display: none;">
+    <DIV class="item-title"><SPAN
+            class="title-json">您已确认属于制造业中小微企业，享受延缓缴纳税款政策，是否确认要提前缴纳已缓缴的税款？</SPAN></DIV>
+    <DIV class="layui-form" style="padding: 5px 0px;"><INPUT name="istqjk" title="否"
+                                                             type="radio" checked="" value="N" lay-filter="levelM"> <INPUT name="istqjk"
+                                                                                                                           title="是" type="radio" value="Y" lay-filter="levelM"></DIV>
+    <DIV id="lyDiv" style="padding: 5px 0px; display: none;"><LABEL class="layui-form-label"
+                                                                    style="padding: 0px;">提前缴款理由：</LABEL>
+        <DIV class="layui-input-block"><INPUT width="100" class="layui-input" id="yxshjzcLy" type="text"></DIV>
+    </DIV>
+</DIV>
+</BODY>
+</HTML>

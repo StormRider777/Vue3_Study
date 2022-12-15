@@ -5,8 +5,8 @@ module.exports = defineConfig({
     lintOnSave:false,
     devServer: {
         //open: true,
-        //host: '192.168.0.2',
-        //port: 8080,
+        // host: 'etax.shandong.chinatax.gov.cn',
+        // port: 8080,
         //这里的ip和端口是前端项目的;下面为需要跨域访问后端项目
         proxy: {
             '/dataserver': {

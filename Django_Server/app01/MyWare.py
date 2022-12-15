@@ -9,6 +9,7 @@ from django.utils.deprecation import MiddlewareMixin
 class MyWare(MiddlewareMixin):
     def process_request(self,request):
         # print('MiddleWare HEADERS:', request.headers)
+        # print(request.session)
         pass
 
     def process_reponse(self,request,response):

@@ -32,7 +32,7 @@ class WsData(AsyncWebsocketConsumer):
         #raise StopConsumer()
         await self.send(self.tip+'[已连接!]')
 
-    def websocket_disconnect(self, message):
+    async def websocket_disconnect(self, message):
         '''
          客户端主动与服务端断开连接,触发的 函数
         :param message:
@@ -44,11 +44,11 @@ class WsData(AsyncWebsocketConsumer):
         # task_id=self.scope['utl_route']['kwwargs'].get('group')
         # async_to_sync(self.channel_layer.group_discard)(task_id,self.channel_name)
         #await self.send('断开连接')
-        async_to_sync(self.channel_layer.group_discard)(
-            self.groupname,
-            self.channel_name
-        )
-        #await self.channel_layer.group_discard(self.groupname,self.connname)
+        # await async_to_sync(self.channel_layer.group_discard)(
+        #     self.groupname,
+        #     self.channel_name
+        # )
+        await self.channel_layer.group_discard(self.groupname,self.channel_name) #self.connname)
         # raise StopConsumer()
 
     async def websocket_receive(self, message):

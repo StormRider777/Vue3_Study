@@ -9,7 +9,7 @@
                 default-active="111"
                 class="el-menu-demo"
                 mode="horizontal"
-                :background-color="$store.state.config.MenuThemes[$store.state.config.CurrentTheme].bgcolor"
+                :background-color="$store.state.config.C.bgcolor"
                 text-color="#fff"
                 active-text-color="#ffd04b"
                 @select="handleSelect"
