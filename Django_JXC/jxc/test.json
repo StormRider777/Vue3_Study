@@ -1,0 +1,126 @@
+[
+  {
+    'id': 1,
+    '_parentId': None,
+    'kmbm': '1001',
+    'label': '现金',
+    'children': [
+      {
+        'id': 1073,
+        '_parentId': 1,
+        'kmbm': '100101',
+        'label': '人民币'
+      }
+    ]
+  },
+  {
+    'id': 2,
+    '_parentId': None,
+    'kmbm': '1002',
+    'label': '笑傲江湖',
+    'children': [
+      {
+        'id': 1074,
+        '_parentId': 2,
+        'kmbm': '100201',
+        'label': '东方不败',
+        'children': [
+          {
+            'id': 1075,
+            '_parentId': 1074,
+            'kmbm': '10020101',
+            'label': '东方不败_侍从1'
+          },
+          {
+            'id': 1076,
+            '_parentId': 1074,
+            'kmbm': '10020102',
+            'label': '东方不败_侍从2'
+          },
+          {
+            'id': 1077,
+            '_parentId': 1074,
+            'kmbm': '10020103',
+            'label': '东方不败_侍从3'
+          },
+          {
+            'id': 1084,
+            '_parentId': 1074,
+            'kmbm': '10020104',
+            'label': '东方不败_侍从4'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    'id': 3,
+    '_parentId': None,
+    'kmbm': '1023',
+    'label': '存货',
+    'children': [
+      {
+        'id': 1078,
+        '_parentId': 3,
+        'kmbm': '102301',
+        'label': '钢材',
+        'children': [
+          {
+            'id': 1080,
+            '_parentId': 1078,
+            'kmbm': '10230101',
+            'label': '螺纹钢'
+          },
+          {
+            'id': 1081,
+            '_parentId': 1078,
+            'kmbm': '10230102',
+            'label': '盘条'
+          },
+          {
+            'id': 1082,
+            '_parentId': 1078,
+            'kmbm': '10230103',
+            'label': '方管'
+          },
+          {
+            'id': 1083,
+            '_parentId': 1078,
+            'kmbm': '10230104',
+            'label': '角钢'
+          }
+        ]
+      },
+      {
+        'id': 1079,
+        '_parentId': 3,
+        'kmbm': '102302',
+        'label': '木材'
+      }
+    ]
+  },
+  {
+    'id': 4,
+    '_parentId': None,
+    'kmbm': '1004',
+    'label': '其他应收款'
+  },
+  {
+    'id': 5,
+    '_parentId': None,
+    'kmbm': '2001',
+    'label': '借款'
+  },
+  {
+    'id': 6,
+    '_parentId': None,
+    'kmbm': '2002',
+    'label': '应付账款'
+  },
+  {
+    'id': 7,
+    '_parentId': None,
+    'kmbm': '2023',
+    'label': '其他应付款'
+  }
+]

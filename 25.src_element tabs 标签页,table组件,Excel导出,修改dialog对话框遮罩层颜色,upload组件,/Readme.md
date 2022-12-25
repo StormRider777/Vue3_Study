@@ -1,4 +1,4 @@
-#Vue3中组件动画 进入离开
+# Vue3中组件动画 进入离开
 - template中的html
 ```html
 <router-view v-slot="{ Component }">
@@ -746,7 +746,7 @@ methods:{
 ```javascript
 <script>
     import {ref,reactive,shallowRef,defineAsyncComponent} from 'vue'
-    import home from '../view/home'
+    import home from views
     export default {
         name:'MyElTabs',
         components:{
@@ -769,7 +769,7 @@ methods:{
                     /**
                      * 重要!!!动态组件
                      */
-                    content:shallowRef(defineAsyncComponent(()=>import("../view/test_"+tabid.toString()+".vue")))
+                    content:shallowRef(defineAsyncComponent(()=>import(views+tabid.toString()+".vue")))
                 })
                 activeName.value=mtab
             }

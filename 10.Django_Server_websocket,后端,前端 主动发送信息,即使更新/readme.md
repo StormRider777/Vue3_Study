@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'channels',
     'app01',
 ]
-ASGI_APPLICATION='Django_Server.asgi.application'
+ASGI_APPLICATION=99.Django_Server
 
 ```
 - 修改 asgi.py  ===相当于 wsgi .django启动默认 wsgi
@@ -40,7 +40,7 @@ from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter,URLRouter
 from . import routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Django_Server.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 99.Django_Server)
 
 # application = get_asgi_application()
 application=ProtocolTypeRouter({

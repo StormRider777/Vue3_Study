@@ -861,7 +861,7 @@ class ComponentPicker {
         }
     }
     /**
-     * Selects an instance in the component view
+     * Selects an instance in the component views
      */
     async elementClicked(e) {
         this.cancelEvent(e);
@@ -2867,7 +2867,7 @@ function capture(instance, index, list) {
                 : child.componentInstance
                     ? capture(child.componentInstance)
                     : undefined)
-            // router-view has both fnContext and componentInstance on vnode.
+            // router-views has both fnContext and componentInstance on vnode.
             : instance.componentInstance ? [capture(instance.componentInstance)] : []).filter(Boolean);
         return {
             uid: functionalId,
@@ -2932,7 +2932,7 @@ function capture(instance, index, list) {
     // check if instance is available in console
     var consoleId = consoleBoundInstances.indexOf(instance.__VUE_DEVTOOLS_UID__);
     ret.consoleId = consoleId > -1 ? '$vm' + consoleId : null;
-    // check router view
+    // check router views
     var isRouterView2 = instance.$vnode && instance.$vnode.data.routerView;
     if (instance._routerView || isRouterView2) {
         ret.isRouterView = true;

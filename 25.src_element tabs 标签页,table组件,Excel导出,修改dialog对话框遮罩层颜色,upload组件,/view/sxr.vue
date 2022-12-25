@@ -34,7 +34,9 @@
         name: "sxr",
         setup(){
             const DialogVisible=ref(false)
+
             return {DialogVisible}
+
         }
 
     }
